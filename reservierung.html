@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservierung</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Reserviere deinen Platz</h1>
+    </header>
+
+    <section id="reservation">
+        <h2>Reservierung für Film</h2>
+        <label for="time">Uhrzeit wählen:</label>
+        <select id="time">
+            <option>15:00</option>
+            <option>18:00</option>
+            <option>21:00</option>
+        </select>
+
+        <label for="seats">Sitzplatz:</label>
+        <input type="number" id="seats" min="1" max="10">
+
+        <button onclick="buchen()">Jetzt buchen</button>
+    </section>
+
+    <script>
+        function buchen() {
+            alert("Reservierung erfolgreich!");
+            window.location.href = "filme.html";
+        }
+    </script>
+</body>
+</html>
