@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Teste den Reservierungsablauf der Kino-Demo.">
+    <title>Platz reservieren - Kinoabend</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <header>
+        <a class="brand" href="index.html">KINO<span>ABEND</span></a>
+        <nav aria-label="Hauptnavigation">
+            <a href="index.html">Startseite</a>
+            <a href="film.html">Alle Filme</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="reservation-panel">
+            <p class="eyebrow">DEIN KINOABEND</p>
+            <h1>Platz reservieren</h1>
+            <p id="reservation-movie">Film wird geladen …</p>
+            <aside class="demo-notice">
+                <strong>Demo</strong>
+                <span>Diese Reservierung ist unverbindlich und wird nicht gespeichert.</span>
+            </aside>
+            <form class="reservation-form" id="reservation-form" hidden>
+                <label for="time">Vorstellung
+                    <select id="time" name="time" required>
+                        <option value="15:00">15:00 Uhr</option>
+                        <option value="18:00">18:00 Uhr</option>
+                        <option value="21:00">21:00 Uhr</option>
+                    </select>
+                </label>
+                <label for="seats">Anzahl Plätze
+                    <input id="seats" name="seats" type="number" min="1" max="10" value="1" required>
+                </label>
+                <button class="button" type="submit">Reservierung testen</button>
+            </form>
+            <p class="reservation-message" id="reservation-message" role="status" hidden></p>
+            <a class="back-link" href="film.html">&larr; Zurück zu den Filmen</a>
+        </section>
+    </main>
+
+    <footer>
+        <a class="brand" href="index.html">KINO<span>ABEND</span></a>
+        <p>Eine statische Kino-Demo. Es werden keine Buchungen gespeichert.</p>
+    </footer>
+</body>
+</html>

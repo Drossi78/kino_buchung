@@ -1,76 +1,110 @@
-$(document).ready(function () {
-    console.log("jQuery ist geladen und bereit!");
+const movies = [
+    {
+        id: "sternreise",
+        title: "Die letzte Sternreise",
+        genre: "Science-Fiction",
+        duration: "128 Min.",
+        description: "Eine mutige Crew folgt einem geheimnisvollen Signal bis an den Rand der Galaxie.",
+        poster: "poster--space",
+        mark: "STERN"
+    },
+    {
+        id: "mitternacht",
+        title: "Mitternacht in Berlin",
+        genre: "Drama",
+        duration: "106 Min.",
+        description: "In einer langen Nacht kreuzen sich die Wege von drei Fremden in der Grossstadt.",
+        poster: "poster--night",
+        mark: "NACHT"
+    },
+    {
+        id: "letzter-vorhang",
+        title: "Der letzte Vorhang",
+        genre: "Mystery",
+        duration: "114 Min.",
+        description: "Hinter den Kulissen eines alten Theaters ist nichts so, wie es scheint.",
+        poster: "poster--stage",
+        mark: "BÜHNE"
+    },
+    {
+        id: "sommerwind",
+        title: "Sommerwind",
+        genre: "Komödie",
+        duration: "98 Min.",
+        description: "Ein unerwarteter Roadtrip wird zum Beginn eines ganz neuen Kapitels.",
+        poster: "poster--summer",
+        mark: "SOMMER"
+    }
+];
 
-    window.showLoginForm = function () {
-        $("#register-form").hide();
-        $("#login-form").show();
-    };
+function renderMovies() {
+    const movieList = document.querySelector("#movie-list");
+    if (!movieList) return;
 
-    window.showRegisterForm = function () {
-        $("#login-form").hide();
-        $("#register-form").show();
-    };
+    movies.forEach((movie) => {
+        const card = document.createElement("article");
+        card.className = "movie-card";
 
-    $("#registerForm").on("submit", function (event) {
-        event.preventDefault();
+        const poster = document.createElement("div");
+        poster.className = `movie-poster ${movie.poster}`;
+        poster.setAttribute("aria-hidden", "true");
+        const posterMark = document.createElement("span");
+        posterMark.textContent = movie.mark;
+        poster.append(posterMark);
 
-        const name = $("#register-name").val().trim();
-        const email = $("#register-email").val().trim();
-        const password = $("#register-password").val().trim();
+        const details = document.createElement("div");
+        details.className = "movie-details";
 
-        if (!name || !email || !password) {
-            alert("Bitte alle Felder ausfüllen!");
-            return;
-        }
+        const meta = document.createElement("p");
+        meta.className = "movie-meta";
+        meta.textContent = `${movie.genre} · ${movie.duration}`;
 
-        // Daten als JSON senden
-        fetch("/api/register", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ name, email, password })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                alert("Fehler bei der Registrierung: " + data.error);
-            } else {
-                alert("Registrierung erfolgreich!");
-                $("#registerForm").trigger("reset");
-                $("#register-form").hide();
-            }
-        })
-        .catch(error => console.error("Fehler:", error));
+        const title = document.createElement("h3");
+        title.textContent = movie.title;
+
+        const description = document.createElement("p");
+        description.className = "movie-description";
+        description.textContent = movie.description;
+
+        const reserveLink = document.createElement("a");
+        reserveLink.className = "button button-card";
+        reserveLink.href = `reservierung.html?film=${encodeURIComponent(movie.id)}`;
+        reserveLink.textContent = "Platz reservieren";
+
+        details.append(meta, title, description, reserveLink);
+        card.append(poster, details);
+        movieList.append(card);
     });
+}
 
-    $("#loginForm").on("submit", function (event) {
+function setupReservation() {
+    const form = document.querySelector("#reservation-form");
+    if (!form) return;
+
+    const movieId = new URLSearchParams(window.location.search).get("film");
+    const movie = movies.find((item) => item.id === movieId);
+    const movieTitle = document.querySelector("#reservation-movie");
+    const message = document.querySelector("#reservation-message");
+
+    if (!movie) {
+        movieTitle.textContent = "Film nicht gefunden";
+        message.textContent = "Bitte wähle zuerst einen Film aus dem Programm.";
+        message.hidden = false;
+        return;
+    }
+
+    movieTitle.textContent = movie.title;
+    form.hidden = false;
+    form.addEventListener("submit", (event) => {
         event.preventDefault();
+        const formData = new FormData(form);
+        const time = formData.get("time");
+        const seats = Number(formData.get("seats"));
 
-        const email = $("#login-email").val().trim();
-        const password = $("#login-password").val().trim();
-
-        if (!email || !password) {
-            alert("Bitte alle Felder ausfüllen!");
-            return;
-        }
-
-        fetch("/api/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ email, password })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                alert("Fehler beim Login: " + data.error);
-            } else {
-                alert("Login erfolgreich!");
-              window.location.href = "film.html";
-            }
-        })
-        .catch(error => console.error("Fehler:", error));
+        message.textContent = `Demo-Reservierung: ${seats} ${seats === 1 ? "Platz" : "Plätze"} für „${movie.title}“ um ${time} Uhr. Es wurde nichts gespeichert.`;
+        message.hidden = false;
     });
-});
+}
+
+renderMovies();
+setupReservation();

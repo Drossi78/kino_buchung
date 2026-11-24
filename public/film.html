@@ -3,30 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Film Auswahl</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="Alle Filme der Kino-Demo auf einen Blick.">
+    <title>Alle Filme - Kinoabend</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
 </head>
 <body>
     <header>
-        <h1>Wähle deinen Film</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Startseite</a></li>
-                <li><a href="#">Meine Buchungen</a></li>
-                <li><a href="#" id="logout">Abmelden</a></li>
-            </ul>
+        <a class="brand" href="index.html">KINO<span>ABEND</span></a>
+        <nav aria-label="Hauptnavigation">
+            <a href="index.html">Startseite</a>
+            <a class="active" href="film.html">Alle Filme</a>
         </nav>
     </header>
 
-    <section id="movies">
-        <h2>Verfügbare Filme</h2>
-        <div id="movie-list">
-            <!-- Hier werden die Filme dynamisch hinzugefügt -->
-        </div>
-    </section>
+    <main>
+        <section class="page-heading">
+            <p class="eyebrow">DEIN KINO PROGRAMM</p>
+            <h1>Alle Filme</h1>
+            <p>Wähle einen Film und starte deine Demo-Reservierung.</p>
+        </section>
+        <aside class="demo-notice">
+            <strong>Statische Demo</strong>
+            <span>Reservierungen werden nicht gespeichert. Bitte keine echten Zugangsdaten eingeben.</span>
+        </aside>
+        <section class="content-section">
+            <div class="movie-grid" id="movie-list" aria-live="polite"></div>
+        </section>
+    </main>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="app.js"></script>
-    <script src="filme.js"></script>
+    <footer>
+        <a class="brand" href="index.html">KINO<span>ABEND</span></a>
+        <p>Eine statische Kino-Demo. Es werden keine Buchungen gespeichert.</p>
+    </footer>
 </body>
 </html>

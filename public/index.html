@@ -3,56 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kino Ticketbuchung</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="Entdecke Filme und teste den Reservierungsablauf in der Kino-Demo.">
+    <title>Kinoabend - Film-Demo</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
 </head>
 <body>
     <header>
-        <h1>Kino Ticketbuchung</h1>
-        <nav>
-            <ul>
-                <li><a href="#">Startseite</a></li>
-                <li><a href="#">Meine Buchungen</a></li>
-                <li><a href="#" onclick="showLoginForm()">Anmelden</a></li>
-                <li><a href="#" onclick="showRegisterForm()">Registrieren</a></li>
-            </ul>
+        <a class="brand" href="index.html">KINO<span>ABEND</span></a>
+        <nav aria-label="Hauptnavigation">
+            <a class="active" href="index.html">Startseite</a>
+            <a href="film.html">Alle Filme</a>
         </nav>
     </header>
 
-    <section id="register-form" style="display: none;">
-        <h2>Registrieren</h2>
-        <form id="registerForm">
-            <label for="register-name">Name:</label>
-            <input type="text" id="register-name" required>
-            <label for="register-email">Email:</label>
-            <input type="email" id="register-email" required>
-            <label for="register-password">Password:</label>
-            <input type="password" id="register-password" required>
-            <button type="submit">Registrieren</button>
-        </form>
-    </section>
+    <main>
+        <section class="hero">
+            <p class="eyebrow">DEIN NÄCHSTER KINOABEND</p>
+            <h1>Grosse Geschichten.<br><span>Grosses Kino.</span></h1>
+            <p class="hero-copy">Finde deinen Lieblingsfilm und teste die Sitzplatzreservierung.</p>
+            <a class="button button-primary" href="#filme">Filme entdecken</a>
+            <div class="hero-art" aria-hidden="true"><span>FILM<br>AB</span></div>
+        </section>
 
-    <section id="login-form" style="display: none;">
-        <h2>Login</h2>
-        <form id="loginForm">
-            <label for="login-email">Email:</label>
-            <input type="email" id="login-email" required>
-            <label for="login-password">Password:</label>
-            <input type="password" id="login-password" required>
-            <button type="submit">Anmelden</button>
-        </form>
-    </section>
+        <aside class="demo-notice">
+            <strong>Statische Demo</strong>
+            <span>Reservierungen werden nicht gespeichert. Bitte keine echten Zugangsdaten eingeben.</span>
+        </aside>
 
-    <section id="movies">
-        <h2>Verfügbare Filme</h2>
-        <!-- Die Filme werden hier dynamisch hinzugefügt -->
-    </section>
+        <section class="content-section" id="filme">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">JETZT IM PROGRAMM</p>
+                    <h2>Filme entdecken</h2>
+                </div>
+                <a class="text-link" href="film.html">Alle Filme ansehen <span aria-hidden="true">&rarr;</span></a>
+            </div>
+            <div class="movie-grid" id="movie-list" aria-live="polite"></div>
+        </section>
+    </main>
 
     <footer>
-        <p>&copy; 2025 Kino Booking. Alle Rechte vorbehalten.</p>
+        <a class="brand" href="index.html">KINO<span>ABEND</span></a>
+        <p>Eine statische Kino-Demo. Es werden keine Buchungen gespeichert.</p>
     </footer>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="app.js"></script>
 </body>
 </html>
